@@ -47,9 +47,8 @@ The string information classifying the charities by name was uneccessary and was
 Once the information was processed it was time to create the dummy columns for use within the model before splitting the data into Test/Train sets and scaling using the StandardScaler Method.
 
 
-## Compile, Train and Evaluate the Models:
 
-#### ++++++++++++++++++++++++++++++ First Model ++++++++++++++++++++++++++++++
+## +++++++++++++++++++++++++++ User Tuned Model +++++++++++++++++++++++++++
 
 With the data ready for training it was time to construct the N.N. model, we used a sequencial model becuase we are interested in a Binary output and the layers will not be shared so this common model will suit us jsut fine. 
 At first we were intersted in evaluating the performance of the model using 3 layers total, 1 hidden with many neurons.
@@ -75,27 +74,46 @@ Model One Accuracy:
 
 -----------------------------------------------------
 
-#### ++++++++++++++++++++++++++++++ Keras Tuned Model ++++++++++++++++++++++++++++++
+## +++++++++++++++++++++++++++ Keras Tuned Model +++++++++++++++++++++++++++
 
 After the first model was constructed there was a curiosity over what the potential accuracy of a model that was tuned using more hyperparameters and a means of selecting those that would be the best fit.
-A method was constructed to do just that, then let loose on the training data to provide the following results:
+A method was constructed to do just that, allowing for evaluation of the data using three algorithms (Relu, Tanh, and Sigmoid), a number of layers and a max of 30 neurons per layer before being let loose on the training data to provide the following results:
 
- 
+ ![Keras Model](keras_method.png)
+
+-----------------------------------------------------
+
+ ![Keras Accuracy](keras_accuracy.png)
+
+-----------------------------------------------------
 
 # Analysis
-relu chosen for flexibility
-keras chose tahn with slightly higher results
-
-
 ## Results:
+### User_Model_ReLU: 
+>- Activation Method: ReLU 
+>- Accuracy: 72.71% 
+>- Loss: 56.94% 
 
-![K-Means Clusters](k-means-result.png)
--------------------------------------------------------------------------------------------------------------------------------------
+### Keras_Model:
+>- Activation Method: Tanh
+>- Accuracy: 73.27%
+>- Loss: 55.69%
+
+Orignally ReLU was chosen in the User_model for its flexibility in dealing with a larger range of numbers, one that would provide useful results. It was interesting to see the slight improvement in performance when the Keras_model evaluated Tanh as the best Activation method, resulting in an slight increase in Accuracy of the model. 
+Once this was observed the initial User_model was recompiled using Tanh as the activation method with the following results.
+
+### User_Model_Tanh: 
+>- Activation Method: Tanh 
+>- Accuracy: 72.90% 
+>- Loss: 56.58%
+
 
 # Conclusion
 
-One of the aspects of machine learning is testing models with just the right hyper-parameter. In this situation  the hyper-parameter Perplexity in TSNE had the largest impact on the clustering of the data present in the final image. The perplexity that produced the clearest image was set to a value of 30. However there were instances when running the same data with the same hyper-parameter led to a different result. 
+A surprising outcome of this project was seeign that the most accurate model was much simplier than the initial User_model containing much fewer neurons, but keeping with the 3 layer construction.
 
-With the lack of data due to processing not taken into consideration; familiarity and understanding of each model what is needed to tune them is most valuable concept learned in this exercise, second only to having a suitable dataset for Machine Learning.
+One of the aspects of machine learning is testing models with just the right hyperparameters. Unsurprisingly the model that had the most tuning proved to show the highest accuracy and lowest loss, however the varaition of those values between the models is very slight and lacks significance. Taking the time to construct a means of hypertuning and comparing results per epoch of model with differing activation fuctions, layers, and neurons will always be preferred to an educated guess when defining model complexity because the iterative changes can be observed as the model tests data and the process will be much more time-efficient when compared to hand tuning.
+Guesses, even when educated can make for a nice starting point when considering complexity but should be pared with adequate reasoning to avoid the wasting of resources.
+
 
 
