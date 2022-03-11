@@ -108,3 +108,5 @@ Guesses, even when educated can make for a nice starting point when considering 
 
 
 
+Email: hendersonalec2212@gmail.com
+LinkedIn: https://www.linkedin.com/in/alec-henderson-8011b521a/
